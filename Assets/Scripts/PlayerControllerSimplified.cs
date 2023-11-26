@@ -34,8 +34,8 @@ public class PlayerControllerSimplified : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        playerRb.centerOfMass = centerOfMass.transform.position; 
+        playerRb = GetComponent<Rigidbody>();
+        playerRb.centerOfMass = centerOfMass.transform.localPosition + centerOfMassOffset; 
 
     }
     
@@ -81,12 +81,15 @@ public class PlayerControllerSimplified : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos()
+void OnDrawGizmos()
 {
-    Rigidbody rb = GetComponent<Rigidbody>();
+    if (!playerRb)
+    {
+        playerRb = GetComponent<Rigidbody>();
+    }
     Gizmos.color = Color.red;
-    // This will draw a red sphere at the center of mass
-    Gizmos.DrawSphere(transform.position + rb.centerOfMass, 0.1f);
+    // Draw a red sphere at the transformed center of mass
+    Gizmos.DrawSphere(transform.position + transform.TransformPoint(playerRb.centerOfMass), 0.1f);
 }
 
 }
