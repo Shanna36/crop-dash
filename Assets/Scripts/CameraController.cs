@@ -8,9 +8,11 @@ public class CameraController : MonoBehaviour
     public Camera sideViewCamera;
     public Camera topCamera;
 
-    private Vector3 sideCameraOffset = new Vector3(19, 13, -22); // Offset for side camera
-    private Vector3 topCameraOffset = new Vector3(8, 11, 6); // Offset for top camera
+    public GameObject controlPanel; 
 
+    private Vector3 sideCameraOffset = new Vector3(19, 13, -22); // Offset for side camera
+    private Vector3 topCameraOffset = new Vector3(10, 6, 0); // Offset for top camera
+     private Quaternion topCameraRotationOffset = Quaternion.Euler(110, 0, 0); 
     void Update()
     {
         // Check which camera is active and set position and rotation accordingly
@@ -24,7 +26,8 @@ public class CameraController : MonoBehaviour
             topCamera.transform.position = player.transform.position + topCameraOffset;
             
             // Match top camera's rotation with player's rotation
-            topCamera.transform.rotation = player.transform.rotation;
+             topCamera.transform.position = controlPanel.transform.position + topCameraOffset;
+            topCamera.transform.rotation = controlPanel.transform.rotation * topCameraRotationOffset;
         }
     }
 }
