@@ -76,7 +76,7 @@ public class PlayerControllerSimplified : MonoBehaviour
         if (other.CompareTag("Wheat"))
         {
             Destroy(other.gameObject);
-            //add slider info for wheat ingestion here
+            //slider logic for fill bar
              fillBar.value += 1;
         }
     }
