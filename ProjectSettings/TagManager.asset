@@ -9,6 +9,7 @@ TagManager:
   - Wheat
   - side camera
   - Tractor
+  - Tractor_Trailer
   layers:
   - Default
   - TransparentFX

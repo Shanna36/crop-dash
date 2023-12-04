@@ -51,11 +51,11 @@ public class PlayerControllerSimplified : MonoBehaviour
             sideViewCamera.enabled = !sideViewCamera.enabled;
             topCamera.enabled = !topCamera.enabled; 
         }
-
-         if (Input.GetKeyDown(KeyCode.Space))
+    //feeder arm animaiton, will return if I have time
+         /*if (Input.GetKeyDown(KeyCode.Space)) 
         {
             isUnloading = true;
-        }
+        }*/
     }
     
     void FixedUpdate()
