@@ -83,7 +83,7 @@ public class PlayerControllerSimplified : MonoBehaviour
    void OnTriggerEnter(Collider other)
     {
     
-        if (other.CompareTag("Wheat") && fillBar.value < 600)
+        if (other.CompareTag("Wheat") && fillBar.value < 300)
         {
             Destroy(other.gameObject);
             //slider logic for fill bar
