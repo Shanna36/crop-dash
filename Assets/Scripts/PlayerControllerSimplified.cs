@@ -19,6 +19,8 @@ public class PlayerControllerSimplified : MonoBehaviour
 
     public Slider fillBar; 
 
+    public bool isUnloading; 
+
     public Vector3 centerOfMassOffset; 
 
         [System.Serializable]
@@ -36,6 +38,7 @@ public class PlayerControllerSimplified : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.centerOfMass = centerOfMass.transform.localPosition + centerOfMassOffset; 
+        isUnloading = false; 
 
     }
     
@@ -47,6 +50,11 @@ public class PlayerControllerSimplified : MonoBehaviour
         {
             sideViewCamera.enabled = !sideViewCamera.enabled;
             topCamera.enabled = !topCamera.enabled; 
+        }
+
+         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isUnloading = true;
         }
     }
     
@@ -70,15 +78,17 @@ public class PlayerControllerSimplified : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
+
+
+   void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collided with" + other.gameObject.name);
-        if (other.CompareTag("Wheat"))
+    
+        if (other.CompareTag("Wheat") && fillBar.value < 600)
         {
             Destroy(other.gameObject);
             //slider logic for fill bar
              fillBar.value += 1;
-        }
+        
     }
 
 void OnDrawGizmos()
@@ -92,4 +102,5 @@ void OnDrawGizmos()
     Gizmos.DrawSphere(transform.position + transform.TransformPoint(playerRb.centerOfMass), 0.1f);
 }
 
+}
 }

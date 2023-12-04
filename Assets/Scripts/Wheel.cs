@@ -16,12 +16,6 @@ public class Wheel : MonoBehaviour
     {
         wcol = GetComponentInChildren<WheelCollider>();
         wmesh = transform.Find("mesh_Wheel");
-
-    if (wmesh == null)
-    {
-        Debug.LogError("Wheel mesh not found for " + gameObject.name);
-    }
-        
     }
 
     public void Steer(float steerInput)
@@ -36,18 +30,13 @@ public class Wheel : MonoBehaviour
         else wcol.brakeTorque = 0;
     }
 
-public void UpdatePosition()
-{
-    Vector3 pos;
-    Quaternion rot;
+    public void UpdatePosition()
+    {
+        Vector3 pos = transform.position;
+        Quaternion rot = transform.rotation;
 
-    wcol.GetWorldPose(out pos, out rot);
-    wmesh.transform.position = pos;
-
-    // Apply rotation for steering (Y-axis) and rolling (Z-axis)
-    wmesh.transform.rotation = Quaternion.Euler(wmesh.transform.rotation.eulerAngles.x, rot.eulerAngles.y, wmesh.transform.rotation.eulerAngles.z);
-    
-    Debug.Log("Wheel rotation being applied: " + wmesh.transform.rotation.eulerAngles);
-
-}
+        wcol.GetWorldPose(out pos, out rot);
+        wmesh.transform.position = pos;
+        wmesh.transform.rotation = rot;
+    }
 }
