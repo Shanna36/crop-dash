@@ -51,11 +51,6 @@ public class PlayerControllerSimplified : MonoBehaviour
             sideViewCamera.enabled = !sideViewCamera.enabled;
             topCamera.enabled = !topCamera.enabled; 
         }
-    //feeder arm animaiton, will return if I have time
-         /*if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-            isUnloading = true;
-        }*/
     }
     
     void FixedUpdate()
@@ -88,8 +83,14 @@ public class PlayerControllerSimplified : MonoBehaviour
             Destroy(other.gameObject);
             //slider logic for fill bar
              fillBar.value += 1;
-        
+        }
+
+        if (other.CompareTag("Tractor_Trailer"))
+        {
+            isUnloading = true;
+        }
     }
+
 
 void OnDrawGizmos()
 {
@@ -102,5 +103,4 @@ void OnDrawGizmos()
     Gizmos.DrawSphere(transform.position + transform.TransformPoint(playerRb.centerOfMass), 0.1f);
 }
 
-}
 }
