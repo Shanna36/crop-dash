@@ -89,7 +89,7 @@ void RotateWheelMesh(WheelCollider wheelCollider, Transform wheelMesh, bool isSt
     }
     else
     {
-        // Fix the Z rotation for back wheels
+        // Fix the Z and Y rotation for back wheels to prevent jitter
         currentRotation.y = 0;
         currentRotation.z = 0;
     }

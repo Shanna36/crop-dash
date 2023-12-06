@@ -4,31 +4,47 @@ using UnityEngine;
 
 public class FeederArmAnimation : MonoBehaviour
 {
-    private Animator animator; 
-    public bool isUnloading;
+    private Animator animator;
+    private PlayerControllerSimplified playerController; // Reference to the PlayerControllerSimplified script
 
-    public GameObject Tractor; 
+    public GameObject combine; // Reference to the player GameObject
+
+    private bool animationStarted = false; // Flag to check if the animation has started
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        isUnloading = false; 
-    }
-
-    // This method is called when the Collider other enters the trigger
-    private void OnTriggerEnter(Collider other)
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        playerController = FindObjectOfType<PlayerControllerSimplified>();
+        if (playerController == null)
         {
-            isUnloading = true; 
-            animator.SetTrigger("FeederArmRotate"); // Start the unloading animation
+            Debug.LogError("PlayerControllerSimplified script not found in the scene.");
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        // You can put any code here that needs to be checked or updated every frame
+        // Make the feeder arm follow the player's position
+        transform.position = combine.transform.position;
+
+        if (!animationStarted)
+        {
+            // Get the player's rotation
+            Quaternion combineRotation = combine.transform.rotation;
+
+            // Create a 90-degree offset on the X-axis
+            Quaternion offsetRotation = Quaternion.Euler(90, 0, 0);
+
+            // Apply the offset rotation to the player's rotation
+            transform.rotation = combineRotation * offsetRotation;
+        }
+
+        // Check the isUnloading status from the player controller
+        if (playerController != null && playerController.isUnloading && !animationStarted)
+        {
+            animator.SetTrigger("FeederArmRotate"); // Start the unloading animation
+            animationStarted = true; // Set the flag to true as the animation has started
+        }
     }
 }
