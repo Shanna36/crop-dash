@@ -22,7 +22,7 @@ public class FeederArmAnimation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isUnloading = true; 
-            animator.SetTrigger("StartUnloadingAnimation"); // Start the unloading animation
+            animator.SetTrigger("FeederArmRotate"); // Start the unloading animation
         }
     }
 
