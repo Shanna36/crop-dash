@@ -33,11 +33,6 @@ public class FeederArmAnimation : MonoBehaviour
             // Get the player's rotation
             Quaternion combineRotation = combine.transform.rotation;
 
-            // Create a 90-degree offset on the X-axis
-            Quaternion offsetRotation = Quaternion.Euler(90, 0, 0);
-
-            // Apply the offset rotation to the player's rotation
-            transform.rotation = combineRotation * offsetRotation;
         }
 
         // Check the isUnloading status from the player controller
